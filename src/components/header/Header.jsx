@@ -4,10 +4,16 @@ import Logo from "../../assets/logo.png";
 import { CgShoppingBag } from "react-icons/cg";
 import { GoThreeBars } from "react-icons/go";
 
+const breakpoints = {
+  tablet: 768,
+};
+
 const Header = () => {
-  const [showMenu, setShowMenu] = useState(false);
+  const [showMenu, setShowMenu] = useState(true);
   const toggleMenu = () => {
-    setShowMenu((showMenu) => !showMenu);
+    if (window.innerWidth < breakpoints.tablet) {
+      setShowMenu((showMenu) => !showMenu);
+    }
   };
   return (
     <div className={css.container}>
@@ -16,9 +22,11 @@ const Header = () => {
         <span>Amazon</span>
       </div>
       <div className={css.right}>
-        <div className={css.bars} onClick={toggleMenu}>
-          <GoThreeBars />
-        </div>
+        {window.innerWidth < breakpoints.tablet && (
+          <div className={css.bars} onClick={toggleMenu}>
+            <GoThreeBars />
+          </div>
+        )}
 
         <ul
           className={css.menu}
